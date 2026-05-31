@@ -1,0 +1,21 @@
+# Local editor and OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Local secrets and environment
+.env
+.env.*
+*.key
+*.pem
+*.p12
+*.pfx
+
+# Optional local app state
+.obsidian/
+.vscode/
+.idea/
+
+# Python/cache artifacts if scripts are added later
+__pycache__/
+*.pyc

@@ -1,0 +1,5 @@
+{
+  "version": 1,
+  "description": "Optional sha256 manifest for source files that have been reviewed into wiki summaries.",
+  "entries": []
+}
