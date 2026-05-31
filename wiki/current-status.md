@@ -1,6 +1,6 @@
 # Current Status
 
-Date: YYYY-MM-DD
+Date: YYYY-MM-DD (replace during setup)
 
 ## Текущее состояние
 
