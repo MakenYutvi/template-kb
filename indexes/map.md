@@ -20,3 +20,7 @@
 - [`../.ai/contract.md`](../.ai/contract.md) - общий контракт.
 - [`../.ai/privacy.md`](../.ai/privacy.md) - правила приватности.
 - [`../.ai/tool-profiles/codex.md`](../.ai/tool-profiles/codex.md) - профиль Codex.
+
+## Prompt layer
+
+- [`../prompts/`](../prompts/) - reusable prompts для AI-чатов и тонких tool-specific оберток.

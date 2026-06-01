@@ -9,3 +9,4 @@
 | `raw/assets/` | files | mixed | depends | `indexes/map.md` | Скриншоты, вложения, изображения. |
 | `wiki/` | markdown | mixed | derived | `wiki/index.md` | Синтезированный слой памяти. |
 | `indexes/` | markdown | mixed | derived | `indexes/map.md` | Навигационные карты. |
+| `prompts/` | markdown | repo | public | `indexes/map.md` | Reusable tool-neutral AI prompts. |
