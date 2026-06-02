@@ -26,5 +26,5 @@ File names should use `kebab-case.md`.
 
 | Prompt | Purpose |
 |---|---|
-| [`web-chat-to-kb-transfer.md`](web-chat-to-kb-transfer.md) | Prepare a Codex prompt for transferring important context from the current web GPT chat into a local knowledge base. |
-| [`web-gpt-global-context-to-kb-transfer.md`](web-gpt-global-context-to-kb-transfer.md) | Prepare a Codex prompt for transferring global context from web GPT into a local knowledge base. |
+| [`web-chat-to-kb-transfer.md`](web-chat-to-kb-transfer.md) | Prepare a two-part transfer package for moving current web GPT chat context into a local knowledge base, robust to payload auto-conversion into `.txt`. |
+| [`web-gpt-global-context-to-kb-transfer.md`](web-gpt-global-context-to-kb-transfer.md) | Prepare a two-part transfer package for moving global web GPT context into a local knowledge base, robust to payload auto-conversion into `.txt`. |
