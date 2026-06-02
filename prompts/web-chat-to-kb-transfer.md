@@ -1,6 +1,3 @@
-# name: web-chat-to-kb-transfer
-# description: Короткий copy-paste prompt для подготовки transfer package из текущего web GPT-чата в локальную knowledge base.
-
 Ты работаешь в web GPT-чате. Подготовь transfer package для Codex, чтобы перенести важный контекст из текущего чата в локальную knowledge base / репозиторий.
 
 Выведи ровно два Markdown-блока:

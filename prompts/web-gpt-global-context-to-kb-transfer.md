@@ -1,6 +1,3 @@
-# name: web-gpt-global-context-to-kb-transfer
-# description: Короткий copy-paste prompt для подготовки transfer package глобального контекста web GPT в локальную knowledge base.
-
 Ты работаешь в web GPT. Подготовь transfer package для Codex, чтобы перенести важный глобальный контекст из web GPT в локальную knowledge base / репозиторий.
 
 Выведи ровно два Markdown-блока:
