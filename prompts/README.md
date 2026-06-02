@@ -26,5 +26,16 @@ File names should use `kebab-case.md`.
 
 | Prompt | Purpose |
 |---|---|
+| [`web-chat-to-kb-transfer-launcher.md`](web-chat-to-kb-transfer-launcher.md) | Short launcher command for running `web-chat-to-kb-transfer.md` when the main template is attached as a file in web GPT. |
 | [`web-chat-to-kb-transfer.md`](web-chat-to-kb-transfer.md) | Prepare a two-part transfer package for moving current web GPT chat context into a local knowledge base, robust to payload auto-conversion into `.txt`. |
+| [`web-gpt-global-context-to-kb-transfer-launcher.md`](web-gpt-global-context-to-kb-transfer-launcher.md) | Short launcher command for running `web-gpt-global-context-to-kb-transfer.md` when the main template is attached as a file in web GPT. |
 | [`web-gpt-global-context-to-kb-transfer.md`](web-gpt-global-context-to-kb-transfer.md) | Prepare a two-part transfer package for moving global web GPT context into a local knowledge base, robust to payload auto-conversion into `.txt`. |
+
+## Quick Start For Transfer Prompts
+
+If web GPT turns a long prompt into a `.txt` or attachment, do not send only the file. Send the short launcher as a text message and attach the main prompt file:
+
+1. For the current chat: copy [`web-chat-to-kb-transfer-launcher.md`](web-chat-to-kb-transfer-launcher.md) into the message and attach [`web-chat-to-kb-transfer.md`](web-chat-to-kb-transfer.md).
+2. For global context: copy [`web-gpt-global-context-to-kb-transfer-launcher.md`](web-gpt-global-context-to-kb-transfer-launcher.md) into the message and attach [`web-gpt-global-context-to-kb-transfer.md`](web-gpt-global-context-to-kb-transfer.md).
+3. Web GPT should produce two blocks: `КОРОТКАЯ КОМАНДА ДЛЯ CODEX` and `TRANSFER PAYLOAD`.
+4. In Codex, send the short command first, then send the payload or a `.txt` file with the payload as a second message.
