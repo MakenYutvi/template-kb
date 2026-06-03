@@ -6,6 +6,7 @@ desktop.ini
 # Local secrets and environment
 .env
 .env.*
+!.env.example
 *.key
 *.pem
 *.p12
@@ -19,3 +20,17 @@ desktop.ini
 # Python/cache artifacts if scripts are added later
 __pycache__/
 *.pyc
+
+# Optional local runtime caches
+.codex_runtime/
+
+# Office lock files
+~$*.xlsx
+~$*.xlsm
+~$*.pptx
+~$*.ppt
+~$*.docx
+~$*.doc
+
+# Generated outputs
+outputs/

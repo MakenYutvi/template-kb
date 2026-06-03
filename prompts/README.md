@@ -21,6 +21,8 @@ File names should use `kebab-case.md`.
 
 | Prompt | Purpose |
 |---|---|
+| [`setup-new-kb.md`](setup-new-kb.md) | Prompt for personalizing a new repository created from this template. |
+| [`create-kb-helper-script.md`](create-kb-helper-script.md) | Prompt for adding a small local helper script with wrappers, docs and verification. |
 | [`web-chat-to-kb-transfer.md`](web-chat-to-kb-transfer.md) | Short copy-paste prompt for preparing a two-part transfer package from the current web GPT chat. |
 | [`web-gpt-global-context-to-kb-transfer.md`](web-gpt-global-context-to-kb-transfer.md) | Short copy-paste prompt for preparing a two-part transfer package from global web GPT context. |
 
