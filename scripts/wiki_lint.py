@@ -16,6 +16,7 @@ from urllib.parse import unquote
 
 MARKDOWN_ROOTS = (
     "AGENTS.md",
+    "CLAUDE.md",
     "README.md",
     "SETUP.md",
     ".ai",
@@ -80,7 +81,7 @@ PAGE_BUDGETS = (
 
 DIGEST_SKIP_DIRS = {".git", "__pycache__"}
 SOURCE_DRIFT_MEMORY_PREFIXES = ("wiki/", "manifests/")
-SOURCE_DRIFT_MEMORY_FILES = {"AGENTS.md", "README.md"}
+SOURCE_DRIFT_MEMORY_FILES = {"AGENTS.md", "CLAUDE.md", "README.md"}
 
 
 @dataclass(frozen=True)

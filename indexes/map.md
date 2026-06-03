@@ -7,6 +7,7 @@
 - [`../README.md`](../README.md) - быстрый старт и структура.
 - [`../SETUP.md`](../SETUP.md) - checklist первичной настройки.
 - [`../AGENTS.md`](../AGENTS.md) - инструкции AI-агенту.
+- [`../CLAUDE.md`](../CLAUDE.md) - тонкий adapter для Claude Code.
 - [`../wiki/current-status.md`](../wiki/current-status.md) - текущее состояние.
 - [`../wiki/log.md`](../wiki/log.md) - журнал изменений.
 - [`../wiki/workflows/`](../wiki/workflows/) - повторяемые процессы.
@@ -23,6 +24,7 @@
 - [`../.ai/contract.md`](../.ai/contract.md) - общий контракт.
 - [`../.ai/privacy.md`](../.ai/privacy.md) - правила приватности.
 - [`../.ai/tool-profiles/codex.md`](../.ai/tool-profiles/codex.md) - профиль Codex.
+- [`../.ai/tool-profiles/claude.md`](../.ai/tool-profiles/claude.md) - профиль Claude.
 
 ## Prompt layer
 

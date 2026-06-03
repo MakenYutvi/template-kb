@@ -6,7 +6,7 @@ Date: YYYY-MM-DD (replace during setup)
 
 Факт: репозиторий создан из шаблона personal knowledge base.
 
-Факт: шаблон содержит локальные проверки в `scripts/`: Python launcher, wiki lint, pre-commit installer и optional checked git sync.
+Факт: шаблон содержит локальные проверки и helpers в `scripts/`: Python launcher, wiki lint, pre-commit installer, setup doctor, item generator, digest manager и optional checked git sync.
 
 Вывод: следующий шаг - персонализировать структуру под владельца, установить локальные проверки и добавить первый source-файл в `raw/personal/inbox/`.
 
@@ -25,7 +25,7 @@ Date: YYYY-MM-DD (replace during setup)
 
 - Какие 2-3 темы владелец хочет вести в этой базе?
 - Какие данные нельзя отправлять в AI-сервисы?
-- Нужно ли подключать Obsidian или достаточно Markdown + Git + Codex?
+- Нужно ли подключать Obsidian или достаточно Markdown + Git + Codex/Claude?
 
 ## Sources
 

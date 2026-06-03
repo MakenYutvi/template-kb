@@ -12,6 +12,14 @@
 
 Примеры `kind`: `setup`, `ingest`, `writeback`, `decision`, `project`, `cleanup`.
 
+## 2026-06-03 | setup | helper-scripts-and-claude
+
+- Scope: template repository setup.
+- Sources: local template evolution; Karpathy LLM Wiki reference.
+- Updated: `scripts/`, `prompts/`, `README.md`, `SETUP.md`, `CLAUDE.md`, `.ai/tool-profiles/claude.md`, navigation files.
+- Outcome: добавлены setup doctor, KB item generator, source digest manager, three operational prompts and Claude adapter.
+- Follow-up: проверить, нужен ли optional meetings pack в следующей итерации.
+
 ## 2026-06-03 | setup | scripts-and-lint
 
 - Scope: template repository setup.

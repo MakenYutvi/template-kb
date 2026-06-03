@@ -4,6 +4,8 @@
 
 Цель: хранить заметки, проекты и устойчивые выводы так, чтобы человек и AI-агент могли быстро восстановить контекст и продолжить работу.
 
+Идея близка к паттерну [LLM Wiki](https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f): исходные материалы лежат в `raw/`, LLM поддерживает синтезированный Markdown-слой `wiki/`, а `AGENTS.md` / `.ai/contract.md` задают схему и рабочие правила.
+
 ## Быстрый старт
 
 1. Создайте приватный репозиторий из этого template repository.
@@ -50,6 +52,7 @@ python3 scripts/wiki_lint.py
 - `indexes/` - навигационные карты.
 - `manifests/` - source manifest и opt-in source digests.
 - `scripts/` - локальные проверки, Python wrapper, pre-commit installer и optional checked git sync.
+- `CLAUDE.md` - тонкий adapter для Claude Code поверх общего контракта.
 
 ## Основной принцип
 
@@ -84,6 +87,19 @@ git add .
 git commit -m "Initialize personal knowledge base"
 git push
 ```
+
+## Полезные Локальные Команды
+
+```powershell
+.\scripts\kb_doctor.cmd
+.\scripts\new_kb_item.cmd decision "Obsidian integration"
+.\scripts\new_kb_item.cmd source-note "First source note" --scope personal
+.\scripts\source_digest.cmd add raw/personal/inbox/first-note.md
+```
+
+- `kb_doctor` проверяет базовую настройку репозитория.
+- `new_kb_item` создает черновики source notes, concepts, projects, decisions, meetings и asset notes.
+- `source_digest` управляет opt-in checksum entries в `manifests/source-digests.json`.
 
 ## Что нельзя хранить в открытом виде
 
