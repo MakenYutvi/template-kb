@@ -25,21 +25,13 @@ Replace template placeholders:
 
 ## 3. Install Local Checks
 
-On Windows:
+Use the command form for your operating system:
 
-```powershell
-.\scripts\install_pre_commit.cmd
-.\scripts\wiki_lint.cmd
-.\scripts\kb_doctor.cmd
-```
-
-On macOS or Linux:
-
-```sh
-python3 scripts/install_pre_commit.py
-python3 scripts/wiki_lint.py
-python3 scripts/kb_doctor.py
-```
+| Task | Windows | macOS/Linux |
+|---|---|---|
+| Install pre-commit | `.\scripts\install_pre_commit.cmd` | `python3 scripts/install_pre_commit.py` |
+| Wiki lint | `.\scripts\wiki_lint.cmd` | `python3 scripts/wiki_lint.py` |
+| Setup doctor | `.\scripts\kb_doctor.cmd` | `python3 scripts/kb_doctor.py` |
 
 The lint checks broken Markdown links, log heading format, wiki asset leakage, missing catalog entries, missing source manifest entries, Obsidian-only links, page budget drift and optional source digest drift.
 
@@ -53,9 +45,10 @@ raw/personal/inbox/first-note.md
 
 Or generate a starter file:
 
-```powershell
-.\scripts\new_kb_item.cmd source-note "First note" --scope personal
-```
+| OS | Command |
+|---|---|
+| Windows | `.\scripts\new_kb_item.cmd source-note "First note" --scope personal` |
+| macOS/Linux | `python3 scripts/new_kb_item.py source-note "First note" --scope personal` |
 
 Then ask the agent:
 
@@ -68,12 +61,11 @@ Then ask the agent:
 
 ## 5. Verify Before Commit
 
-Run:
+Run `Wiki lint` from the table above, then:
 
-```powershell
+```sh
 git status
 git diff
-.\scripts\wiki_lint.cmd
 git diff --check
 ```
 

@@ -21,21 +21,7 @@
 Сначала предложи минимальные правки, затем внеси их.
 ```
 
-6. Установите локальные проверки.
-
-Windows:
-
-```powershell
-.\scripts\install_pre_commit.cmd
-.\scripts\wiki_lint.cmd
-```
-
-macOS/Linux:
-
-```sh
-python3 scripts/install_pre_commit.py
-python3 scripts/wiki_lint.py
-```
+6. Установите локальные проверки: выполните команды `Install pre-commit` и `Wiki lint` из раздела «Локальные команды».
 
 ## Структура
 
@@ -77,29 +63,34 @@ python3 scripts/wiki_lint.py
 4. Проверьте изменения через Git diff.
 5. Сделайте первый commit.
 
-## Минимальные Git-команды
+## Локальные команды
 
-```powershell
-git status
-git diff
-.\scripts\wiki_lint.cmd
-git add .
-git commit -m "Initialize personal knowledge base"
-git push
-```
+Windows использует `.cmd` wrappers, потому что `python` не всегда есть в PATH. macOS/Linux используют Python entrypoints напрямую.
 
-## Полезные Локальные Команды
-
-```powershell
-.\scripts\kb_doctor.cmd
-.\scripts\new_kb_item.cmd decision "Obsidian integration"
-.\scripts\new_kb_item.cmd source-note "First source note" --scope personal
-.\scripts\source_digest.cmd add raw/personal/inbox/first-note.md
-```
+| Task | Windows | macOS/Linux |
+|---|---|---|
+| Install pre-commit | `.\scripts\install_pre_commit.cmd` | `python3 scripts/install_pre_commit.py` |
+| Wiki lint | `.\scripts\wiki_lint.cmd` | `python3 scripts/wiki_lint.py` |
+| Setup doctor | `.\scripts\kb_doctor.cmd` | `python3 scripts/kb_doctor.py` |
+| New decision | `.\scripts\new_kb_item.cmd decision "Obsidian integration"` | `python3 scripts/new_kb_item.py decision "Obsidian integration"` |
+| New source note | `.\scripts\new_kb_item.cmd source-note "First source note" --scope personal` | `python3 scripts/new_kb_item.py source-note "First source note" --scope personal` |
+| Add source digest | `.\scripts\source_digest.cmd add raw/personal/inbox/first-note.md` | `python3 scripts/source_digest.py add raw/personal/inbox/first-note.md` |
 
 - `kb_doctor` проверяет базовую настройку репозитория.
 - `new_kb_item` создает черновики source notes, concepts, projects, decisions, meetings и asset notes.
 - `source_digest` управляет opt-in checksum entries в `manifests/source-digests.json`.
+
+## Минимальные Git-команды
+
+Перед commit запустите `Wiki lint` из таблицы выше.
+
+```text
+git status
+git diff
+git add .
+git commit -m "Initialize personal knowledge base"
+git push
+```
 
 ## Что нельзя хранить в открытом виде
 
