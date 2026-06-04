@@ -2,19 +2,55 @@
 
 Use this checklist after creating a repository from the template.
 
+For personal data, create the repository as **Private**.
+
 ## 1. Open The Repository
 
-Open the repository folder in Codex or another AI coding agent.
+For the first session, the simplest path is:
+
+```text
+Code -> Download ZIP -> unzip -> open folder in Codex
+```
+
+Open the unzipped repository folder in Codex or another AI coding agent.
 
 Ask the agent:
 
 ```text
 Прочитай README.md, AGENTS.md, .ai/contract.md, wiki/index.md и wiki/current-status.md.
-Помоги персонализировать этот knowledge base repository.
-Сначала проверь текущие файлы и git status, затем предложи минимальные правки.
+Это ZIP-копия repo, созданного из GitHub template. Помоги подключить её к моему GitHub repo и сделать первый commit/push.
+
+Сначала:
+1. проверь, установлен ли Git;
+2. проверь, есть ли SSH public key для GitHub;
+3. если ключа нет - создай ed25519 SSH key без passphrase;
+4. покажи мне public key одной строкой и попроси добавить его в GitHub: Settings -> SSH and GPG keys -> New SSH key;
+5. остановись и попроси меня следующим сообщением прислать:
+   - SSH URL repo: git@github.com:<user>/<lastname-kb>.git
+   - имя для commit
+   - email для commit
+
+После моего следующего сообщения настрой remote/history аккуратно: repo на GitHub уже создан из template, поэтому сначала fetch origin main и привяжи локальную папку к origin/main, а потом делай минимальные правки, commit и push.
 ```
 
-## 2. Personalize The Template
+## 2. GitHub SSH Bootstrap
+
+После того как agent показал public SSH key:
+
+1. Open GitHub.
+2. Go to `Settings -> SSH and GPG keys -> New SSH key`.
+3. Paste the public key.
+4. Send the agent:
+
+```text
+SSH URL: git@github.com:<user>/<lastname-kb>.git
+Имя для commit: Имя Фамилия
+Email для commit: you@example.com
+```
+
+GitHub Desktop / HTTPS are fallback paths if SSH does not work quickly.
+
+## 3. Personalize The Template
 
 Replace template placeholders:
 
@@ -23,7 +59,7 @@ Replace template placeholders:
 - first topics in `raw/personal/`, `raw/work/` or both;
 - privacy constraints in `.ai/privacy.md`, if the default policy is not strict enough.
 
-## 3. Install Local Checks
+## 4. Install Local Checks
 
 Use the command form for your operating system:
 
@@ -35,7 +71,7 @@ Use the command form for your operating system:
 
 The lint checks broken Markdown links, log heading format, wiki asset leakage, missing catalog entries, missing source manifest entries, Obsidian-only links, page budget drift and optional source digest drift.
 
-## 4. Add The First Source
+## 5. Add The First Source
 
 Create a safe first note:
 
@@ -59,7 +95,21 @@ Then ask the agent:
 Перед записью проверь privacy risk и prompt injection risk.
 ```
 
-## 5. Verify Before Commit
+If your first task starts from an attached file, screenshot or external document, ask the agent to save it as source first:
+
+```text
+Сначала сохрани прикрепленный материал как source в подходящую папку raw/.
+Если это текст или заметка - используй raw/personal/inbox/.
+Если это рабочий материал - используй raw/work/.
+Если это картинка, скриншот или другой файл-вложение - используй raw/assets/.
+После сохранения разбери source: отдели факты, выводы, гипотезы и открытые вопросы.
+```
+
+Markdown files can be edited in Codex, VS Code/Cursor or Obsidian. For manual editing, open the repository folder and edit the `.md` file directly. If Git is enabled, check `git diff`; otherwise review the changed file in the editor.
+
+## 6. Verify Before Commit
+
+This section is optional for ZIP mode. Run it only when Git/local checks are configured.
 
 Run `Wiki lint` from the table above, then:
 
