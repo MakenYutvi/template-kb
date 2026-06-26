@@ -1,4 +1,4 @@
-# Personal Sources
+# Личные источники
 
 `raw/personal/` хранит личные источники.
 

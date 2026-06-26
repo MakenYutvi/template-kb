@@ -1,4 +1,4 @@
-# Source Provenance Workflow
+# Workflow source provenance
 
 Этот workflow определяет, как связывать wiki-утверждения с источниками.
 
@@ -62,3 +62,21 @@ Source имеет приоритет над summary. `wiki/` помогает б
 1. Считай source более надежным.
 2. Отметь конфликт в ответе или рабочей заметке.
 3. Обнови wiki через `writeback.md`, если это в рамках задачи.
+
+## Reference Mirror и Overlay
+
+`Reference Mirror` - локальное read-only/refreshable зеркало внешней системы или выгрузки. Примеры: exported docs, issue tracker export, spreadsheet dump, mailbox export.
+
+Правила:
+
+- Не считай reference mirror автоматически source of truth, если в README/frontmatter указана ограниченная freshness или mirror status.
+- Не редактируй mirror ради summary; обновляй его только штатным pull/export workflow.
+- Сохраняй синтезированные выводы отдельно: в `wiki/`, `wiki/outputs/`, source note или decision log.
+
+`Overlay` - синтезированный слой поверх reference mirror: проверенные выводы, решения, связи, TODO или corrections.
+
+Правила:
+
+- Overlay должен ссылаться на mirror/source и явно отделять факты от выводов.
+- Если mirror обновился и противоречит overlay, перепроверь source и обнови overlay через `writeback.md`.
+- Не превращай overlay в копию внешнего документа.

@@ -1,4 +1,4 @@
-# Decisions Index
+# Индекс решений
 
 `wiki/decisions/` хранит устойчивые решения, которые важно восстановить позже.
 
@@ -8,7 +8,7 @@
 - Отделять принятое решение от текущих заметок и черновых рассуждений.
 - Сохранять альтернативы, последствия и источники.
 
-## Когда Создавать Decision
+## Когда создавать decision
 
 Создавайте decision page, если решение:
 
@@ -22,8 +22,8 @@
 
 - [`_template.md`](_template.md)
 
-## Catalog
+## Каталог
 
 | Decision | Status | Scope | Summary |
 |---|---|---|---|
-| none yet | - | - | Add the first decision when a durable repository-level choice appears. |
+| пока нет | - | - | Добавьте первое решение, когда появится durable repository-level choice. |

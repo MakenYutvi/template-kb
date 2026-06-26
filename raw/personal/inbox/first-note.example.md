@@ -1,4 +1,4 @@
-# First Note Example
+# Пример первой заметки
 
 Дата: YYYY-MM-DD
 

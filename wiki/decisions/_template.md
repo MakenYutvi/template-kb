@@ -1,17 +1,17 @@
-# YYYY-MM-DD Short Decision Title
+# YYYY-MM-DD Короткое название решения
 
 Status: proposed
 Date: YYYY-MM-DD
 Scope: personal | work | mixed | repo
 Owner: repository owner
 
-## Context
+## Контекст
 
-## Decision
+## Решение
 
-## Alternatives Considered
+## Рассмотренные альтернативы
 
-## Consequences
+## Последствия
 
 ## Sources
 

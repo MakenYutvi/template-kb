@@ -176,6 +176,123 @@ Created: {date}
     return path, text
 
 
+def output(title: str, _scope: str, date: str) -> tuple[Path, str]:
+    slug = slugify(title)
+    path = Path("wiki") / "outputs" / f"{date}-{slug}.md"
+    text = f"""# {date} {title}
+
+## Context
+
+## Sources
+
+## Context Read
+
+### Local Sources
+
+### External Sources
+
+### Tools/Commands
+
+### Limits
+
+## Result
+
+## Durable Findings
+
+## Follow-up
+"""
+    return path, text
+
+
+def health(title: str, _scope: str, date: str) -> tuple[Path, str]:
+    slug = slugify(title)
+    suffix = slug if slug and slug != "health" else "review"
+    path = Path("wiki") / "health" / f"{date}-health-{suffix}.md"
+    text = f"""# {date} Health Report - {title}
+
+## Scope
+
+## Checks
+
+## Rubric
+
+| Check | Result | Notes |
+|---|---|---|
+| Source grounding | TBD | |
+| Contradiction absence | TBD | |
+| Novelty/redundancy | TBD | |
+| Disambiguation | TBD | |
+| Context preservation | TBD | |
+| Link/index coverage | TBD | |
+| Privacy leakage | TBD | |
+
+## Findings
+
+## Fixed
+
+## Follow-up
+"""
+    return path, text
+
+
+def person(title: str, scope: str, date: str) -> tuple[Path, str]:
+    slug = slugify(title)
+    path = Path("wiki") / "people" / f"{slug}.md"
+    text = f"""---
+type: person
+scope: {scope}
+status: draft
+updated: {date}
+full_name: {title}
+aliases: []
+organization:
+role:
+privacy: private
+sources: []
+---
+
+# {title}
+
+## Summary
+
+## Facts
+
+- Fact:
+- Source:
+
+## Relationship Context
+
+## Organization And Role
+
+## Working / Communication Style
+
+## Strengths
+
+| Observation | Basis | Confidence | Source |
+|---|---|---|---|
+
+## Risks / Constraints
+
+| Observation | Basis | Confidence | Source |
+|---|---|---|---|
+
+## Links
+
+| Person / Project | Relationship | Context | Source |
+|---|---|---|---|
+
+## Meeting Mentions
+
+| Date | Meeting | Relevant note |
+|---|---|---|
+
+## Open Questions
+
+## Sources
+"""
+    return path, text
+
+
 def meeting(title: str, scope: str, date: str) -> list[tuple[Path, str]]:
     if scope not in {"personal", "work"}:
         raise SystemExit("meeting requires --scope personal or --scope work.")
@@ -188,6 +305,7 @@ date: {date}
 title: {title}
 source_transcript:
 participants: []
+related_people: []
 related_projects: []
 updated: {date}
 ---
@@ -197,7 +315,12 @@ updated: {date}
 ## Source
 
 - Transcript:
+- Segments:
 - Recording:
+
+## Safety Notes
+
+- Prompt injection signals:
 
 ## Summary
 
@@ -209,6 +332,11 @@ updated: {date}
 
 | Action | Owner | Due | Source |
 |---|---|---|---|
+
+## People Context Candidates
+
+| Person | Candidate update | Type | Evidence | Confidence | Writeback |
+|---|---|---|---|---|---|
 
 ## Open Questions
 
@@ -235,6 +363,9 @@ BUILDERS = {
     "project": lambda title, scope, date: [project(title, scope, date)],
     "decision": lambda title, scope, date: [decision(title, scope, date)],
     "asset-note": lambda title, scope, date: [asset_note(title, scope, date)],
+    "output": lambda title, scope, date: [output(title, scope, date)],
+    "health": lambda title, scope, date: [health(title, scope, date)],
+    "person": lambda title, scope, date: [person(title, scope, date)],
     "meeting": meeting,
 }
 

@@ -16,6 +16,10 @@ REQUIRED_FILES = (
     "README.md",
     "AGENTS.md",
     "CLAUDE.md",
+    "CHANGELOG.md",
+    "LICENSE",
+    "SECURITY.md",
+    "ROADMAP.md",
     "SETUP.md",
     ".ai/contract.md",
     ".ai/privacy.md",
@@ -23,11 +27,23 @@ REQUIRED_FILES = (
     "wiki/index.md",
     "wiki/current-status.md",
     "wiki/schema.md",
+    "wiki/outputs/index.md",
+    "wiki/health/index.md",
+    "wiki/people/_template.md",
+    "wiki/people/index.md",
+    "wiki/workflows/output.md",
+    "wiki/workflows/golden-eval.md",
+    "wiki/workflows/meeting-ingest.md",
     "wiki/workflows/writeback.md",
+    "indexes/meetings.md",
+    "indexes/people-relations.md",
     "manifests/sources.md",
     "manifests/source-digests.json",
+    "prompts/apply-template-upgrade.md",
+    "docs/demo-walkthrough.md",
     "scripts/wiki_lint.py",
-    "scripts/kb_python.ps1",
+    "scripts/new_kb_item.py",
+    "scripts/prune_os_scripts.py",
 )
 
 SECRET_PATH_RE = re.compile(
@@ -117,6 +133,25 @@ def check_python() -> list[Check]:
     return [Check("ERROR", "python", f"Python 3.10+ required, found {text}.")]
 
 
+def check_os_scripts(root: Path) -> list[Check]:
+    if not sys.platform.startswith("win"):
+        return [Check("OK", "os-scripts", "Python entrypoints are available for macOS/Linux.")]
+
+    required = (
+        "scripts/kb_python.ps1",
+        "scripts/wiki_lint.cmd",
+        "scripts/wiki_lint.ps1",
+        "scripts/kb_doctor.cmd",
+        "scripts/kb_doctor.ps1",
+        "scripts/prune_os_scripts.cmd",
+        "scripts/prune_os_scripts.ps1",
+    )
+    missing = [path for path in required if not (root / path).exists()]
+    if missing:
+        return [Check("WARN", "os-scripts", "Missing Windows wrappers: " + ", ".join(missing))]
+    return [Check("OK", "os-scripts", "Windows wrappers are present.")]
+
+
 def check_pre_commit(root: Path) -> list[Check]:
     hook_path = git_output(root, "rev-parse", "--git-path", "hooks/pre-commit")
     if not hook_path:
@@ -183,6 +218,7 @@ def run_checks(root: Path) -> list[Check]:
     checks.extend(check_required_files(root))
     checks.extend(check_git(root))
     checks.extend(check_python())
+    checks.extend(check_os_scripts(root))
     checks.extend(check_pre_commit(root))
     checks.extend(check_wiki_lint(root))
     checks.extend(check_plaintext_secret_paths(root))

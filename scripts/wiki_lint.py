@@ -17,6 +17,7 @@ from urllib.parse import unquote
 MARKDOWN_ROOTS = (
     "AGENTS.md",
     "CLAUDE.md",
+    "CHANGELOG.md",
     "README.md",
     "SETUP.md",
     ".ai",
@@ -24,6 +25,7 @@ MARKDOWN_ROOTS = (
     "indexes",
     "manifests",
     "prompts",
+    "docs",
     "raw",
 )
 
@@ -49,9 +51,14 @@ BINARY_EXTENSIONS = {
 
 REQUIRED_MANIFEST_PATHS = (
     "raw/personal/",
+    "raw/personal/meetings/",
     "raw/work/",
+    "raw/work/meetings/",
     "raw/assets/",
     "wiki/",
+    "wiki/outputs/",
+    "wiki/health/",
+    "wiki/people/",
     "indexes/",
     "prompts/",
     "scripts/",
@@ -62,6 +69,8 @@ SOURCE_DIGEST_MANIFEST = Path("manifests") / "source-digests.json"
 LINK_RE = re.compile(r"!?\[[^\]\n]*\]\(([^)\n]+)\)")
 LOG_HEADING_RE = re.compile(r"^## \d{4}-\d{2}-\d{2} \| [a-z-]+ \| [a-z0-9-]+$")
 SHA256_RE = re.compile(r"^[0-9a-f]{64}$")
+OUTPUT_FILENAME_RE = re.compile(r"^\d{4}-\d{2}-\d{2}-[a-z0-9][a-z0-9-]*\.md$")
+HEALTH_FILENAME_RE = re.compile(r"^\d{4}-\d{2}-\d{2}-health(?:-[a-z0-9][a-z0-9-]*)?\.md$")
 LEGACY_WORK_PATH = "work" + "/"
 LEGACY_PERSONAL_PATH = "personal" + "/"
 OLD_CYCLE = "source -> " + "ingest"
@@ -76,6 +85,8 @@ DEFAULT_WIKI_PAGE_HARD_LIMIT = 350
 PAGE_BUDGETS = (
     ("wiki/log.md", 400, 800),
     ("wiki/decisions/", 120, 220),
+    ("wiki/outputs/", 300, 600),
+    ("wiki/health/", 220, 400),
     ("wiki/workflows/", 160, 280),
 )
 
@@ -375,6 +386,34 @@ def check_obsidian_syntax(root: Path) -> list[Issue]:
     return issues
 
 
+def check_wiki_output_health_sections(root: Path) -> list[Issue]:
+    issues: list[Issue] = []
+    checks = (
+        (
+            "wiki/outputs",
+            OUTPUT_FILENAME_RE,
+            "output-name",
+            "Use YYYY-MM-DD-short-slug.md for output files",
+        ),
+        (
+            "wiki/health",
+            HEALTH_FILENAME_RE,
+            "health-name",
+            "Use YYYY-MM-DD-health.md or YYYY-MM-DD-health-scope.md for health reports",
+        ),
+    )
+    for directory, pattern, check_name, message in checks:
+        base = root / directory
+        if not base.exists():
+            continue
+        for path in sorted(base.glob("*.md")):
+            if path.name == "index.md":
+                continue
+            if not pattern.match(path.name):
+                issues.append(Issue("error", check_name, rel(root, path), message))
+    return issues
+
+
 def page_budget_for(path: str) -> tuple[int, int]:
     for prefix, soft_limit, hard_limit in PAGE_BUDGETS:
         if path == prefix or path.startswith(prefix):
@@ -590,6 +629,7 @@ def run_checks(root: Path) -> list[Issue]:
         check_catalog_entries,
         check_manifest_entries,
         check_obsidian_syntax,
+        check_wiki_output_health_sections,
         check_page_budget,
         check_source_digests,
         check_staged_source_drift,

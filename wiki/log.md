@@ -1,4 +1,4 @@
-# Context Log
+# Журнал контекста
 
 Журнал значимых изменений контекста.
 
@@ -12,18 +12,26 @@
 
 Примеры `kind`: `setup`, `ingest`, `writeback`, `decision`, `project`, `cleanup`.
 
+## 2026-06-24 | setup | memory-workflows-upgrade
+
+- Scope: template repository setup.
+- Sources: mature KB operational patterns, адаптированные без private source content.
+- Updated: `wiki/outputs/`, `wiki/health/`, `wiki/people/`, `indexes/meetings.md`, `indexes/people-relations.md`, meeting source stubs, workflow docs, prompts, helper scripts и lint checks.
+- Outcome: шаблон поддерживает cycle `source -> triage -> ingest/compile -> wiki -> query/output -> writeback -> lint/health`, substantial outputs, health reports, golden eval, prompt-injection-aware meeting ingest и merge-first upgrade prompt.
+- Follow-up: проверить upgrade на персонализированной KB без перезаписи пользовательского контента.
+
 ## 2026-06-03 | setup | helper-scripts-and-claude
 
 - Scope: template repository setup.
 - Sources: local template evolution; Karpathy LLM Wiki reference.
 - Updated: `scripts/`, `prompts/`, `README.md`, `SETUP.md`, `CLAUDE.md`, `.ai/tool-profiles/claude.md`, navigation files.
-- Outcome: добавлены setup doctor, KB item generator, source digest manager, three operational prompts and Claude adapter.
+- Outcome: добавлены setup doctor, KB item generator, source digest manager, три operational prompts и Claude adapter.
 - Follow-up: проверить, нужен ли optional meetings pack в следующей итерации.
 
 ## 2026-06-03 | setup | scripts-and-lint
 
 - Scope: template repository setup.
-- Sources: mature knowledge base operational patterns, adapted without private source content.
+- Sources: mature knowledge base operational patterns, адаптированные без private source content.
 - Updated: `scripts/`, `SETUP.md`, `wiki/workflows/`, `wiki/decisions/`, `prompts/`, `README.md`, `AGENTS.md`, `.ai/contract.md`.
 - Outcome: добавлены локальные проверки, pre-commit installer, setup checklist, helper-script prompt и расширенные wiki workflows.
 - Follow-up: проверить lint на чистом clone после персонализации первого пользователя.

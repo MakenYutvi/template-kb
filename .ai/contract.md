@@ -1,4 +1,4 @@
-# AI Agent Contract
+# Контракт AI-агента
 
 Этот репозиторий является личной knowledge base для человека и AI-агента.
 
@@ -15,10 +15,14 @@
 
 - `raw/` - фактические источники и заметки.
 - `wiki/` - краткая синтезированная память.
+- `wiki/outputs/` - существенные generated outputs до устойчивого writeback.
+- `wiki/health/` - отчеты о качестве базы, lint и health-check.
+- `wiki/decisions/` - устойчивые решения.
+- `wiki/workflows/` - повторяемые процессы работы с базой.
 - `indexes/` - навигация.
 - `AGENTS.md` - правила поведения агента.
 - `.ai/` - общий контракт и профили инструментов.
-- `prompts/` - reusable tool-neutral prompts.
+- `prompts/` - переиспользуемые tool-neutral prompts.
 - `scripts/` - локальные проверки и небольшая автоматизация.
 
 Если `wiki/` противоречит `raw/`, приоритет у `raw/`.
@@ -32,16 +36,17 @@
 ## Базовый цикл
 
 ```text
-source -> triage -> ingest -> wiki -> query -> writeback -> lint
+source -> triage -> ingest/compile -> wiki -> query/output -> writeback -> lint/health
 ```
 
 Практически это означает:
 
 1. Сначала положить исходный материал в `raw/`.
 2. Попросить агента разобрать источник.
-3. Сохранить устойчивый вывод в `wiki/`.
-4. Зафиксировать значимое изменение в `wiki/log.md`.
-5. Проверить изменения через wiki lint и Git diff.
+3. Сохранить устойчивый вывод в `wiki/` или substantial generated output в `wiki/outputs/`.
+4. Выполнить writeback для durable findings или явно выбрать no-op.
+5. Зафиксировать значимое изменение в `wiki/log.md` или `wiki/health/`.
+6. Проверить изменения через wiki lint и Git diff.
 
 Если работа начинается с прикрепленного файла, скриншота, транскрипта или внешнего документа, агент должен сначала предложить сохранить материал или source-заметку в `raw/`. Исключение - одноразовый вопрос без writeback, где пользователь явно не хочет сохранять материал в базе.
 
@@ -50,9 +55,13 @@ source -> triage -> ingest -> wiki -> query -> writeback -> lint
 После значимой работы агент должен:
 
 - обновить `wiki/current-status.md`, `wiki/log.md` или связанную wiki-страницу;
+- сохранить reusable report в `wiki/outputs/`, если результат должен пережить чат, но еще не является устойчивым знанием;
+- сохранить health report в `wiki/health/`, если проверка качества должна быть воспроизводимой;
 - или явно сказать, что writeback не нужен.
 
 Writeback не нужен для разовых ответов, черновиков без долгосрочной ценности и чувствительных данных.
+
+Если пользователь исправляет вывод агента, важное исправление можно сохранить как `Feedback Proposal` после проверки privacy/safety. Не сохраняй raw sensitive values, если достаточно безопасного описания.
 
 ## Локальные проверки
 
@@ -62,11 +71,33 @@ Writeback не нужен для разовых ответов, черновик
 .\scripts\wiki_lint.cmd
 ```
 
+Если Windows wrappers были удалены через OS pruning или работа идет на
+macOS/Linux, используй Python entrypoint:
+
+```sh
+python3 scripts/wiki_lint.py
+```
+
 Pre-commit hook можно установить через:
 
 ```powershell
 .\scripts\install_pre_commit.cmd
 ```
+
+На macOS/Linux или после pruning используй:
+
+```sh
+python3 scripts/install_pre_commit.py
+```
+
+В персональной KB после первичной настройки или template upgrade можно удалить
+wrappers для другой ОС:
+
+```sh
+python3 scripts/prune_os_scripts.py --apply
+```
+
+Публичный `template-kb` должен сохранять оба набора wrappers.
 
 ## Приватность
 
