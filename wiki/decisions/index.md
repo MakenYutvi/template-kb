@@ -26,4 +26,4 @@
 
 | Decision | Status | Scope | Summary |
 |---|---|---|---|
-| пока нет | - | - | Добавьте первое решение, когда появится durable repository-level choice. |
+| [Лёгкий маршрут памяти](2026-11-16-light-memory-workflows.md) | accepted | repo | Решение публичного шаблона: краткий старт, обычный writeback и безопасная компакция; не личное решение владельца KB. |

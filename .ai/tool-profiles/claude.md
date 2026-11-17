@@ -11,10 +11,9 @@ Claude может использовать `CLAUDE.md` как тонкий adapt
 - `.ai/privacy.md`
 - `wiki/index.md`
 - `wiki/current-status.md`
-- `wiki/schema.md`
-- `wiki/workflows/`
-- `wiki/outputs/`
-- `wiki/health/`
+- `wiki/workflows/context-budget.md`
+
+Остальные входы читаются по выбранному маршруту: `wiki/schema.md` при изменении wiki, нужный workflow, конкретный output/health report. Каталоги целиком и исторические архивы не являются обязательным стартом.
 
 ## Правила
 

@@ -70,8 +70,26 @@ foreach ($Candidate in $Candidates) {
         exit 0
     }
 
-    & $Candidate.Command @($Candidate.PrefixArgs) @PythonArgs
-    exit $LASTEXITCODE
+    # Python uses the Windows ANSI code page for redirected streams by default.
+    # Use UTF-8 when the caller has not chosen a stream encoding. An explicit
+    # PYTHONIOENCODING overrides -X utf8: preserve the caller's Python options
+    # and matching decoder too (including -E/-I, which ignore the environment).
+    # A value such as ':replace' selects only an error handler, not a codec.
+    $PreviousConsoleEncoding = [Console]::OutputEncoding
+    try {
+        $StreamEncoding = ($env:PYTHONIOENCODING -split ':', 2)[0]
+        $Utf8Args = @()
+        if (!$StreamEncoding) {
+            [Console]::OutputEncoding = New-Object System.Text.UTF8Encoding($false)
+            $Utf8Args = @('-X', 'utf8')
+        }
+        & $Candidate.Command @($Candidate.PrefixArgs) @Utf8Args @PythonArgs
+        $PythonExitCode = $LASTEXITCODE
+    }
+    finally {
+        [Console]::OutputEncoding = $PreviousConsoleEncoding
+    }
+    exit $PythonExitCode
 }
 
 Write-Error "Could not find a working Python 3.10+ runtime. Set KB_PYTHON to a Python executable path."

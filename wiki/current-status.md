@@ -10,6 +10,8 @@ Date: YYYY-MM-DD (замените при настройке)
 
 Факт: шаблон содержит tracked-разделы `wiki/outputs/` и `wiki/health/`, optional people/meetings starter pack и workflow `source -> triage -> ingest/compile -> wiki -> query/output -> writeback -> lint/health`.
 
+Факт: обычная работа использует минимальный контекст и лёгкий writeback; для сокращения страниц есть [compact-document](../prompts/compact-document.md) с Must Preserve и восстановимой историей. Повтор без новых данных — no-op.
+
 Вывод: следующий шаг - персонализировать структуру под владельца, установить локальные проверки и добавить первый source-файл в `raw/personal/inbox/`.
 
 Гипотеза: первые полезные сценарии будут связаны с личными проектами, рабочими заметками и планированием.
@@ -20,7 +22,7 @@ Date: YYYY-MM-DD (замените при настройке)
 2. Уточнить назначение репозитория в `README.md`.
 3. Добавить первую заметку в `raw/personal/inbox/`.
 4. Установить pre-commit hook через `scripts/install_pre_commit.cmd` или прямой Python-запуск на macOS/Linux.
-5. После настройки локальных проверок удалить wrappers для другой ОС через `scripts/prune_os_scripts.py`, если KB не должна оставаться cross-platform.
+5. Сохранить entrypoints всех ОС; удалять лишние wrappers через `scripts/prune_os_scripts.py` только по явному выбору пользователя.
 6. Попросить Codex разобрать заметку и предложить writeback.
 7. При необходимости использовать `wiki/outputs/` для длинных отчетов или `wiki/people/`/meeting workflow для устойчивого контекста по людям.
 8. Проверить wiki lint, `git diff` и сделать первый commit.

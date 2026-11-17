@@ -4,7 +4,7 @@
 
 ## Шаги
 
-1. Прочитай `README.md`, `wiki/index.md` и `wiki/current-status.md`.
+1. После применимых инструкций выбери уровень чтения в [context-budget](context-budget.md); для общего контекста используй `wiki/index.md` и нужную область `wiki/current-status.md`. Прочитанные неизменённые входы повторно не загружай.
 2. Найди релевантные source-файлы в `raw/` или summary в `wiki/`.
 3. Для существенных прошлых анализов проверь `wiki/outputs/`, но не считай output устойчивой истиной без source/provenance.
 4. Отдели факты, выводы и гипотезы.
