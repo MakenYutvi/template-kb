@@ -12,6 +12,22 @@
 
 Примеры `kind`: `setup`, `ingest`, `writeback`, `decision`, `project`, `cleanup`.
 
+## 2026-11-17 | decision | optional-prompts-and-automation-setup
+
+- Scope: переносимые prompts для документов, продуктовой работы, проверки KB и обслуживания чатов/Git.
+- Sources: [каталог](../prompts/README.md), [рецепты](../docs/automation-recipes.md).
+- Outcome: setup/upgrade предлагают автоматизации; режим, параметры и права выбирает пользователь. Существующие задания и локальные prompts сохраняются. Приватные проектные задания и служебные runners не включены.
+- Checks: [случаи сохранности и режимов](../docs/workflow-checks.md); границы фактической проверки — [CHANGELOG](../CHANGELOG.md).
+
+## 2026-11-16 | decision | light-memory-workflows
+
+- Scope: публичный template, без пользовательских sources и экспериментальной инфраструктуры.
+- Sources: [решение](decisions/2026-11-16-light-memory-workflows.md), [синтетические cases](../docs/workflow-checks.md).
+- Updated: правила, context-budget/writeback, compact prompt, upgrade prompt и связанные entrypoints/docs.
+- Optional: практические prompts сохранения сессии, восстановления задачи и review документа; рецепты локальной проверки и запуска выбранных задач. Расписания не включены, периодический обзор по умолчанию только возвращает отчёт.
+- Outcome: явный no-op повтора, сохранение истории и локальных правил; учёт, модель и расписания не требуются. Исправлена комплектация `wiki/outputs/`, setup и upgrade сохраняют entrypoints ОС по умолчанию; пользовательские индексы и ignore-исключения не заменяются шаблоном.
+- Follow-up: ограничения и результаты проверок — в [CHANGELOG](../CHANGELOG.md); агентский A/B-прогон не выполнялся.
+
 ## 2026-06-24 | setup | memory-workflows-upgrade
 
 - Scope: template repository setup.

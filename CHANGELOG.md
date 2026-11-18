@@ -1,104 +1,92 @@
 # Журнал изменений
 
-## 2026-06-26 - Upgrade template-kb memory workflows and presentation
+Здесь — что изменилось в шаблоне и как этим воспользоваться.
+Промпт — это готовое задание, которое можно передать ИИ-агенту.
 
-Этот release упаковывает `template-kb` как Markdown-first систему памяти для
-AI-агентов: source provenance, durable outputs, writeback workflows, health
-checks, безопасный upgrade существующих KB и более взрослая публичная витрина
-репозитория.
+**Создаёте базу впервые?** Начните с [настройки](SETUP.md).
+**База уже есть?** Используйте [промпт обновления](prompts/apply-template-upgrade.md),
+чтобы сохранить свои материалы и настройки.
 
-Главный lifecycle теперь явно описан во всех core docs:
+## 2026-11-17 — Обновление базы, понятные промпты и автоматизации
 
-```text
-source -> triage -> ingest/compile -> wiki -> query/output -> writeback -> lint/health
-```
+### Готовые задания и автоматизации
 
-Ценность изменения в том, что KB перестает быть просто папкой заметок. У нее
-появляется проверяемая операционная модель: где лежат источники, где живут
-выводы, как сохранять важные generated outputs, как проверять качество памяти и
-как обновлять уже персонализированные базы без перезаписи пользовательской
-работы.
+В [каталоге](prompts/README.md) теперь 24 промпта. Они сгруппированы по задачам:
+для каждого указано, когда запускать, что подготовить и какой результат ожидать.
+Добавлены готовые запросы, объяснения режимов и различий между похожими задачами.
+С их помощью можно:
 
-### Добавлено
+- сохранить полезные результаты чата и продолжить задачу в новой сессии;
+- проверить документ, подготовить требования к продукту или задаче;
+- оценить, помогает ли база в реальной работе и сколько ресурсов это требует;
+- проверить изменения перед отправкой в GitHub;
+- сохранить старые чаты и, если всё важное сохранено, архивировать их.
 
-- `wiki/outputs/` для substantial generated outputs до durable writeback.
-- `wiki/health/` для dated lint/health reports и manual quality review.
-- Workflows: `output`, `golden-eval`, `meeting-ingest`, расширенные
-  `writeback`, `source-provenance` и `lint`.
-- Практики `Context Read`, `Reference Mirror -> Overlay`, `Feedback Proposal` и
-  manual health rubric.
-- Optional people/meetings starter pack: `wiki/people/`,
-  `indexes/meetings.md`, `indexes/people-relations.md`,
-  `raw/personal/meetings/`, `raw/work/meetings/`.
-- `prompts/apply-template-upgrade.md` как canonical versioned upgrade prompt.
-- `scripts/prune_os_scripts.py` и Windows wrappers для удаления script wrappers,
-  которые не относятся к текущей operating system после setup/upgrade
-  personalized KB.
-- `new_kb_item` skeletons для `output`, `health`, `person` и расширенный
-  `meeting` skeleton.
-- Product maturity files: `LICENSE`, `SECURITY.md`, `ROADMAP.md`.
-- `docs/demo-walkthrough.md` с безопасным end-to-end примером memory flow.
+При создании или обновлении базы агент предлагает **настроить автоматизации
+сейчас или позже**. Например, синхронизацию с GitHub или обработку неактивных
+чатов. Вы выбираете задачи, расписание и разрешённые действия. Для чатов
+предлагаются 7 дней без активности и не более 5 чатов за запуск; значения можно
+изменить. Само обновление базы не включает задания.
 
-### Изменено
+Для настройки позже достаточно вызвать
+[промпт автоматизаций](prompts/setup-automations.md).
+Доступ к истории чатов и архивированию зависит от возможностей выбранного приложения.
 
-- `README.md` стал публичной витриной проекта: problem statement, memory
-  lifecycle diagram, value table, entrypoints для новой KB, upgrade и local
-  checks.
-- `SETUP.md`, `AGENTS.md`, `.ai/contract.md`, `wiki/index.md`,
-  `wiki/schema.md` и workflow docs приведены к новой memory model.
-- Markdown-документация переведена на русский как основной публичный язык;
-  technical identifiers, commands, filenames и устойчивые workflow terms
-  сохранены там, где они являются интерфейсом.
-- `prompts/apply-template-upgrade.md` теперь `Prompt Version: 2026-06-26.1`.
-  Служебная информация перенесена в конец, а запуск upgrade prompt рекомендован
-  в planning mode перед применением изменений.
-- `prompts/README.md` описывает versioned upgrade prompt как зрелый public
-  interface.
-- `wiki_lint.py` проверяет output/health naming, Markdown links, catalog и
-  manifest expectations без private repo-specific required paths.
-- `kb_doctor.py` ожидает public maturity files, demo walkthrough и корректно
-  учитывает OS-pruned repositories.
-- `README.md` кратко описывает local helpers, а подробные команды оставлены в
-  `SETUP.md`.
+Промпты не требуют конкретной модели ИИ. Агент читает только задания, нужные
+для текущей работы, а не весь каталог при каждом обращении.
 
-### Заметки по миграции
+### Бережное сохранение и обновление заметок
 
-Для существующих KB repositories делайте upgrade через canonical prompt, а не
-копированием нового template поверх старого repository.
+- **Меньше повторной работы.** Уточнены правила: читать нужные материалы,
+  обновлять существующую заметку и не создавать дубликат, если новых данных нет.
+- **Сокращение без потери важного.** Новый [промпт сокращения](prompts/compact-document.md)
+  требует сохранить важные факты, ссылки и восстановимую копию прежнего текста.
+- **Обновление уже работающей базы.** Агент должен сохранить ваши источники,
+  заметки, историю, локальные правила и собственные промпты. Различия с шаблоном
+  не дают ему права заменить пользовательские файлы целиком.
+- **Исправлено сохранение отчётов.** Раздел `wiki/outputs/` теперь входит в Git.
+  Раньше правило исключения файлов могло скрывать его при создании новой копии.
+- **Проверяемые выводы.** Ссылка на источник не считается доказательством его
+  применения, а ответ агента «готово» — подтверждением результата пользователем.
+  Команды внутри чужих документов и переписки не меняют правила агента.
 
-Рекомендуемый flow:
+Для существующей базы используйте [промпт обновления](prompts/apply-template-upgrade.md).
+Он предлагает изменения с учётом ваших файлов. Добавление промпта сокращения
+не означает согласия на сокращение всей базы.
 
-1. Скопируйте
-   [`prompts/apply-template-upgrade.md`](https://github.com/MakenYutvi/template-kb/blob/main/prompts/apply-template-upgrade.md).
-2. Вставьте prompt в агента, запущенного внутри существующей personalized KB.
-3. Лучше запускать prompt в planning mode: сначала получить merge plan, риски и
-   список затронутых файлов, затем разрешить применение изменений.
+### Совместимость и проверка
 
-Агент должен применить upgrade merge-first: добавить новые universal workflows и
-starter sections, аккуратно обновить shared docs/scripts и сохранить existing
-`raw/`, personalized `wiki/`, indexes, decisions, prompts и local conventions.
+Windows-команда запуска Python по умолчанию использует UTF-8, чтобы кириллица
+читалась корректно и при передаче агенту. Явно заданная `PYTHONIOENCODING`
+и соответствующая ей кодировка консоли сохраняются. Добавлены тесты кодировок
+и Git-ignore; проверка исключений `!` уточнена в инструкции обновления.
 
-Не заменяйте `wiki/current-status.md`, `wiki/log.md` или
-`manifests/sources.md` wholesale в personalized KB. Агент должен сообщить
-использованные `Prompt Version` и template commit/tag, если они доступны.
+Шаблон состоит из обычных Markdown-файлов и содержит команды для **Windows,
+macOS и Linux**. Вы можете выбрать удобный редактор и ИИ-агента; возможности
+автоматизации зависят от инструментов, доступных этому агенту.
 
-### Совместимость
+На Windows проверены создание новой базы и обновление существующей с тестовыми
+пользовательскими данными. Проверки файлов и ссылок прошли; пользовательские
+данные сохранились. На macOS/Linux и других моделях ИИ эти сценарии ещё не запускались.
+Экономия токенов этим обновлением не доказана.
 
-- Upgrade остается Markdown-first и Obsidian-compatible без требования
-  `.obsidian/` или plugins.
-- Public `template-kb` остается cross-platform и хранит Windows/macOS/Linux
-  script paths.
-- Personalized KB repositories могут запускать `prune_os_scripts` после setup
-  или upgrade, если не нужна одна KB для нескольких operating systems.
-- Commit и push остаются explicit user actions, а не automatic setup steps.
+Отчёты разработки сохранены в [PR #1](https://github.com/MakenYutvi/template-kb/pull/1)
+и не входят в стартовую KB. Для проверки своей копии используйте
+[сценарии и команды тестов](docs/workflow-checks.md).
 
-### Проверка
+## 2026-06-26 — Основа для работы с источниками и выводами
 
-Release проверен на starter repo:
+В этой версии появились отдельные места для исходных материалов, выводов,
+отчётов и проверок качества. Добавлены шаблоны заметок о людях и встречах,
+инструменты создания файлов и промпт обновления существующей базы.
 
-- `.\scripts\wiki_lint.cmd`
-- `.\scripts\kb_doctor.cmd`
-- `git diff --check`
-- Python bytecode compilation для updated scripts
-- `new_kb_item.py` dry-runs для `output`, `health`, `person` и `meeting`
-- repository scan на private/domain-specific traces перед release
+Правила описали полный путь: сохранить источник, разобрать его, записать
+полезные выводы и проверить результат. Для выводов нужно указывать основания;
+для внешних копий документов — хранить пересказ отдельно от оригинала.
+
+Документация стала преимущественно русскоязычной. Добавлены демонстрационный
+пример, лицензия, правила безопасности и планы развития. Команды для разных
+ОС сохранены; фиксация и отправка изменений в Git выполняются по поручению владельца.
+
+Подробности июньского выпуска сохранены в
+[прежней редакции журнала](https://github.com/MakenYutvi/template-kb/blob/e26ff3d421b53139a934ee59967d145120cd7d38/CHANGELOG.md).

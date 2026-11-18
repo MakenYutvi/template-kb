@@ -9,6 +9,7 @@
 - [`ingest.md`](ingest.md) - добавить новый source, разобрать его и выполнить compile в wiki/index при необходимости.
 - [`output.md`](output.md) - сохранить substantial generated output перед устойчивым writeback.
 - [`writeback.md`](writeback.md) - сохранить устойчивый результат сессии.
+- [`../../prompts/compact-document.md`](../../prompts/compact-document.md) - сократить страницу с сохранением смысла, истории и ссылок.
 - [`lint.md`](lint.md) - проверить качество wiki, запустить автоматический lint и при необходимости сохранить health report.
 - [`source-provenance.md`](source-provenance.md) - проверить связь wiki-утверждений с источниками.
 - [`golden-eval.md`](golden-eval.md) - ручная регрессионная проверка повторяемых KB-задач.

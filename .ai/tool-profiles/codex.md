@@ -7,7 +7,8 @@ Codex используется как основной агент для раб�
 Попросите Codex:
 
 ```text
-Прочитай README.md, AGENTS.md, .ai/contract.md и wiki/current-status.md.
+Прочитай AGENTS.md, .ai/contract.md, .ai/privacy.md и wiki/workflows/context-budget.md.
+Для общего контекста используй wiki/index.md и нужную область wiki/current-status.md.
 Скажи, какой контекст ты восстановил, и предложи следующий маленький шаг.
 ```
 
