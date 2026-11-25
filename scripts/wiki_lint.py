@@ -19,6 +19,8 @@ MARKDOWN_ROOTS = (
     "CLAUDE.md",
     "CHANGELOG.md",
     "README.md",
+    "ROADMAP.md",
+    "SECURITY.md",
     "SETUP.md",
     ".ai",
     "wiki",

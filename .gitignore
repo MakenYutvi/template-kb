@@ -34,5 +34,6 @@ __pycache__/
 ~$*.docx
 ~$*.doc
 
-# Local generated artifacts at the repository root; wiki/outputs/ is tracked.
+# Local deliverables and scratch files at the repository root.
 /outputs/
+/tmp/
