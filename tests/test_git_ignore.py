@@ -42,6 +42,7 @@ class GitIgnoreTests(unittest.TestCase):
         for name, ignored in (
             ("wiki/outputs/index.md", False), ("wiki/outputs/report.md", False),
             ("outputs/local.md", True), ("project/outputs/report.md", False),
+            ("tmp/example.txt", True), ("project/tmp/example.txt", False),
             (".env", True), (".env.example", False), ("private.key", True),
             (".kb-runtime/state.json", True), (".codex_runtime/probe.txt", True),
             (".ai/automation-preferences.local.json", True),
